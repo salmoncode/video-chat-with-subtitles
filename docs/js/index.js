@@ -23,10 +23,7 @@ const joinRoom = async () => {
       remoteVideoElm.play()
     })
 
-    room.on("data", ({ src, data }) => {
-      console.log(data)
-      applyRemoteText(data)
-    })
+    room.on("data", ({ src, data }) => applyRemoteText(data))
   })
 }
 
@@ -43,10 +40,7 @@ const startRecognition = () => {
     send(text);
   }
 
-  recognition.onsoundend = () => {
-    recognition.start()
-  }
-
+  recognition.onsoundend = () => recognition.start()
   recognition.start()
 }
 
@@ -60,9 +54,7 @@ const applyRemoteText = text => {
   textElm.textContent = text
 }
 
-const send = text => {
-  room.send(text);
-}
+const send = text => room.send(text)
 
 const main = async () => {
   await joinRoom()
