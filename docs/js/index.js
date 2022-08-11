@@ -60,8 +60,8 @@ const applyRemoteText = text => {
 const send = text => room.send(text)
 
 const main = async () => {
-  await joinRoom()
   startRecognition()
+  await joinRoom()
 }
 
 window.onload = main
