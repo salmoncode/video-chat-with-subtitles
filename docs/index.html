@@ -11,13 +11,14 @@
 </head>
 <body>
   <h1>字幕付きビデオチャット</h1>
-  <div class="container">
-    <div class="video-container">
+  <div class="video-container">
+    <div class="local-video-container">
       <video class="local-stream"></video>
-      <video class="remote-stream"></video>
+      <div class="text local-text"></div>
     </div>
-    <div class="chat">
-      <textarea cols="30" rows="10"></textarea>
+    <div class="remote-video-container">
+      <video class="remote-stream"></video>
+      <div class="text remote-text"></div>
     </div>
   </div>
 </body>

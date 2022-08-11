@@ -1,35 +1,56 @@
 body {
   text-align: center;
-}
-
-.container {
-  width: 80vw;
-  margin: 0 auto;
-  /* background-color: blueviolet; */
+  box-sizing: border-box;
 }
 
 .video-container {
+  width: 55%;
+  margin: 0 auto;
+  margin-top: 20px;
   display: flex;
   justify-content: space-between;
+  align-items: flex-end;
 }
 
 video {
+  object-fit: cover;
   border-radius: 50%;
   border: 3px solid;
-  width: 38vw;
-  height: 38vw;
-  background-color: gray;
 }
 
-.chat {
-  width: 100%;
-  margin-top: 20px;
+.text {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: beige;
 }
 
-textarea {
-  box-sizing:border-box;
-  padding: 20px;
-  width: 100%;
+.local-video-container {
+  position: relative;
+  width: 15vw;
+  height: 15vw;
+}
+
+.local-stream {
+  width: 15vw;
+  height: 15vw;
+}
+
+.local-text {
   font-size: 24px;
-  border: 2px solid;
+}
+
+.remote-video-container {
+  position: relative;
+}
+
+.remote-stream {
+  width: 40vw;
+  height: 40vw;
+  border-radius: 50%;
+}
+
+.remote-text {
+  font-size: 36px;
 }

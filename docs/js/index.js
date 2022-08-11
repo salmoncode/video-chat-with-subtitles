@@ -1,5 +1,3 @@
-const chatLog = []
-
 const apiKey = "23d763e7-f3dc-403a-81ae-9ce014c4b9d8"
 
 let peer
@@ -26,7 +24,8 @@ const joinRoom = async () => {
     })
 
     room.on("data", ({ src, data }) => {
-      applyText(data)
+      console.log(data)
+      applyRemoteText(data)
     })
   })
 }
@@ -39,17 +38,21 @@ const startRecognition = () => {
   recognition.onresult = (event) => {
     const results = event.results
     const text = results[results.length - 1][0].transcript
-    applyText(`あなた: ${text}`)
-    send(`${peer.id}: ${text}`);
+    applyLocalText(text)
+    send(text);
   }
 
   recognition.start()
 }
 
-const applyText = (text) => {
-  chatLog.push(text)
-  const textAreaElm = document.querySelector("textarea")
-  textAreaElm.value = chatLog.join("\n")
+const applyLocalText = (text) => {
+  const textElm = document.querySelector(".local-text")
+  textElm.textContent = text
+}
+
+const applyRemoteText = text => {
+  const textElm = document.querySelector(".remote-text")
+  textElm.textContent = text
 }
 
 const send = text => {
