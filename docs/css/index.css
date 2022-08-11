@@ -3,8 +3,12 @@ body {
   box-sizing: border-box;
 }
 
+h1 {
+  color: #666;
+}
+
 .video-container {
-  width: 60%;
+  width: 75%;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -14,6 +18,7 @@ body {
 video {
   object-fit: cover;
   border-radius: 50%;
+  border: 8px solid #ccc;
 }
 
 .orange {
@@ -25,7 +30,6 @@ video {
   bottom: 0;
   left: 50%;
   transform: translate(-50%, -30%);
-  background-color: green;
   border-radius: 15px;
   padding: 10px;
   width: 80%;
@@ -39,29 +43,32 @@ video {
   left: 25%;
   margin-left: -15px;
   border: 15px solid transparent;
+}
+
+.local-text {
+  background-color: green;
+}
+
+.local-text:before {
   border-bottom: 15px solid green;
 }
 
-.local-video-container {
-  position: relative;
-  width: 15vw;
-  height: 15vw;
-  font-size: 24px;
+.remote-text {
+  background-color: brown;
 }
 
-.local-stream {
-  width: 15vw;
-  height: 15vw;
+.remote-text:before {
+  border-bottom: 15px solid brown;
 }
 
-.remote-video-container {
-  width: 40vw;
-  height: 40vw;
+.local-video-container, .remote-video-container {
   position: relative;
+  width: 35vw;
+  height: 35vw;
   font-size: 36px;
 }
 
-.remote-stream {
-  width: 40vw;
-  height: 40vw;
+.local-stream, .remote-stream {
+  width: 35vw;
+  height: 35vw;
 }
