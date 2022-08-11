@@ -1,5 +1,7 @@
 const apiKey = "23d763e7-f3dc-403a-81ae-9ce014c4b9d8"
 
+let recognition
+
 let peer
 let room
 
@@ -31,9 +33,20 @@ const joinRoom = async () => {
 
 const startRecognition = () => {
   SpeechRecognition = webkitSpeechRecognition || SpeechRecognition
-  const recognition = new SpeechRecognition()
-  recognition.interimResults = true
+  recognition = new SpeechRecognition()
   recognition.continuous = true
+  recognition.interimResults = true
+  recognition.lang = 'ja-JP'
+  recognition.maxAlternatives = 1
+
+  recognition.onstart = () => {
+    console.log("recognition", "start")
+  }
+
+  recognition.onend = () => {
+    console.log("recognition", "end")
+    restartRecognition()
+  }
 
   recognition.onresult = (event) => {
     const results = event.results
@@ -42,8 +55,37 @@ const startRecognition = () => {
     send(text);
   }
 
-  recognition.onsoundend = () => recognition.start()
-  recognition.onerror = (event) => recognition.start()
+  // なんらかの音が検出できたとき
+  recognition.onsoundstart = () => {
+    console.log("recognition", "sound start")
+  }
+
+  recognition.onsoundend = () => {
+    console.log("recognition", "sound end")
+  }
+
+  // 音声認識できる音が検出できたとき
+  recognition.onspeechstart = () => {
+    console.log("recognition", "speech start")
+  }
+
+  recognition.onspeechend = () => {
+    console.log("recognition", "speech end")
+  }
+
+  recognition.onerror = (event) => {
+    if(event.error == "no-speech") {
+      console.log("recognition", "no-speech")
+      return;
+    }
+    console.error(event.error)
+  }
+
+  recognition.start()
+}
+
+const restartRecognition = () => {
+  recognition.stop()
   recognition.start()
 }
 

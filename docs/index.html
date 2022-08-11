@@ -1,16 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>字幕付きビデオチャット</title>
+  <title>吹き出しくん</title>
+
+  <!-- favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text x=%2250%%22 y=%2250%%22 style=%22dominant-baseline:central;text-anchor:middle;font-size:90px;%22>💬</text></svg>">
+
+  <!-- JavaScript -->
   <script src="https://cdn.webrtc.ecl.ntt.com/skyway-4.4.5.js"></script>
   <script src="./js/index.js"></script>
+
+  <!-- css -->
+  <link rel="stylesheet" href="./css/common.css">
   <link rel="stylesheet" href="./css/index.css">
+  <link rel="stylesheet" href="./css/mobile.css">
 </head>
 <body>
-  <h1>吹き出しくん</h1>
+  <h1>💬 吹き出しくん</h1>
   <div class="video-container">
     <div class="local-video-container">
       <video class="local-stream"></video>
