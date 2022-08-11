@@ -5,6 +5,7 @@ let room
 
 const joinRoom = async () => {
   const localStream = await await navigator.mediaDevices.getUserMedia({audio: true, video: true})
+
   const localVideoElm = document.querySelector(".local-stream")
   localVideoElm.srcObject = localStream
   localVideoElm.volume = 0
@@ -42,14 +43,29 @@ const startRecognition = () => {
   }
 
   recognition.onsoundend = () => recognition.start()
-  recognition.onerror = (event) => {
-    console.log(event.error)
-    recognition.start()
-  }
+  recognition.onerror = (event) => recognition.start()
   recognition.start()
 }
 
-const applyLocalText = (text) => {
+const attachAudio = (stream) => {
+  const src = audioContext.createMediaStreamSource(stream)
+  const analyser = audioContext.createAnalyser()
+  analyser.smoothingTimeConstant = 0.3;
+  analyser.fftSize = 1024;
+
+  processor = audioContext.createScriptProcessor(2048, 1, 1);
+
+  processor.onaudioprocess = () => {
+    var array =  new Uint8Array(analyser.frequencyBinCount);
+    analyser.getByteFrequencyData(array);
+    var average = getAverageVolume(array)
+    console.log('VOLUME:' + average); //here's the volume
+  }
+
+  src.connect(processor)
+}
+
+const applyLocalText = text => {
   const textElm = document.querySelector(".local-text")
   textElm.textContent = text
 }
@@ -62,6 +78,7 @@ const applyRemoteText = text => {
 const send = text => room.send(text)
 
 const main = async () => {
+  const audioContext = new AudioContext()
   await joinRoom()
   startRecognition()
 }
