@@ -47,24 +47,6 @@ const startRecognition = () => {
   recognition.start()
 }
 
-const attachAudio = (stream) => {
-  const src = audioContext.createMediaStreamSource(stream)
-  const analyser = audioContext.createAnalyser()
-  analyser.smoothingTimeConstant = 0.3;
-  analyser.fftSize = 1024;
-
-  processor = audioContext.createScriptProcessor(2048, 1, 1);
-
-  processor.onaudioprocess = () => {
-    var array =  new Uint8Array(analyser.frequencyBinCount);
-    analyser.getByteFrequencyData(array);
-    var average = getAverageVolume(array)
-    console.log('VOLUME:' + average); //here's the volume
-  }
-
-  src.connect(processor)
-}
-
 const applyLocalText = text => {
   const textElm = document.querySelector(".local-text")
   textElm.textContent = text
@@ -78,7 +60,6 @@ const applyRemoteText = text => {
 const send = text => room.send(text)
 
 const main = async () => {
-  const audioContext = new AudioContext()
   await joinRoom()
   startRecognition()
 }
