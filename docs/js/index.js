@@ -33,6 +33,7 @@ const joinRoom = async () => {
 const startRecognition = () => {
   SpeechRecognition = webkitSpeechRecognition || SpeechRecognition
   const recognition = new SpeechRecognition()
+  recognition.interimResults = true
   recognition.continuous = true
 
   recognition.onresult = (event) => {
@@ -40,6 +41,10 @@ const startRecognition = () => {
     const text = results[results.length - 1][0].transcript
     applyLocalText(text)
     send(text);
+  }
+
+  recognition.onsoundend = () => {
+    recognition.start()
   }
 
   recognition.start()

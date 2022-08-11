@@ -4,9 +4,8 @@ body {
 }
 
 .video-container {
-  width: 55%;
+  width: 60%;
   margin: 0 auto;
-  margin-top: 20px;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
@@ -15,21 +14,39 @@ body {
 video {
   object-fit: cover;
   border-radius: 50%;
-  border: 3px solid;
+}
+
+.orange {
+  border: 5px solid orange;
 }
 
 .text {
   position: absolute;
   bottom: 0;
   left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: beige;
+  transform: translate(-50%, -30%);
+  background-color: green;
+  border-radius: 15px;
+  padding: 10px;
+  width: 80%;
+  color: white;
+}
+
+.text:before {
+  content: "";
+  position: absolute;
+  top: -30px;
+  left: 25%;
+  margin-left: -15px;
+  border: 15px solid transparent;
+  border-bottom: 15px solid green;
 }
 
 .local-video-container {
   position: relative;
   width: 15vw;
   height: 15vw;
+  font-size: 24px;
 }
 
 .local-stream {
@@ -37,20 +54,14 @@ video {
   height: 15vw;
 }
 
-.local-text {
-  font-size: 24px;
-}
-
 .remote-video-container {
+  width: 40vw;
+  height: 40vw;
   position: relative;
+  font-size: 36px;
 }
 
 .remote-stream {
   width: 40vw;
   height: 40vw;
-  border-radius: 50%;
-}
-
-.remote-text {
-  font-size: 36px;
 }
