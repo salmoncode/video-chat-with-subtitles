@@ -7,6 +7,7 @@ const joinRoom = async () => {
   const localStream = await await navigator.mediaDevices.getUserMedia({audio: true, video: true})
   const localVideoElm = document.querySelector(".local-stream")
   localVideoElm.srcObject = localStream
+  localVideoElm.volume = 0
   localVideoElm.play()
 
   peer = new Peer({key: apiKey})
@@ -41,6 +42,10 @@ const startRecognition = () => {
   }
 
   recognition.onsoundend = () => recognition.start()
+  recognition.onerror = (event) => {
+    console.log(event.error)
+    recognition.start()
+  }
   recognition.start()
 }
 
