@@ -1,0 +1,35 @@
+body {
+  text-align: center;
+}
+
+.container {
+  width: 80vw;
+  margin: 0 auto;
+  /* background-color: blueviolet; */
+}
+
+.video-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+video {
+  border-radius: 50%;
+  border: 3px solid;
+  width: 38vw;
+  height: 38vw;
+  background-color: gray;
+}
+
+.chat {
+  width: 100%;
+  margin-top: 20px;
+}
+
+textarea {
+  box-sizing:border-box;
+  padding: 20px;
+  width: 100%;
+  font-size: 24px;
+  border: 2px solid;
+}
