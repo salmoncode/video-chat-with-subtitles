@@ -22,6 +22,7 @@ video {
   object-fit: cover;
   border-radius: 50%;
   border: 8px solid #ccc;
+  transform: scale(-1, 1);
 }
 
 .orange {
