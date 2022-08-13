@@ -6,8 +6,7 @@ let peer
 let room
 
 const joinRoom = async () => {
-  const localStream = await await navigator.mediaDevices.getUserMedia({audio: true, video: true})
-
+  const localStream = await navigator.mediaDevices.getUserMedia({audio: true, video: true})
   const localVideoElm = document.querySelector(".local-stream")
   localVideoElm.srcObject = localStream
   localVideoElm.volume = 0
@@ -15,13 +14,12 @@ const joinRoom = async () => {
 
   peer = new Peer({key: apiKey})
   peer.on("open", () => {
-    room = peer.joinRoom("video-chat-with-subtitles", {
+    room = peer.joinRoom(getRoomName(), {
       mode: "sfu",
       stream: localStream,
     })
 
     room.on("stream", stream => {
-      console.log("stream")
       const remoteVideoElm = document.querySelector(".remote-stream")
       remoteVideoElm.srcObject = stream
       remoteVideoElm.play()
@@ -48,7 +46,7 @@ const startRecognition = () => {
     restartRecognition()
   }
 
-  recognition.onresult = (event) => {
+  recognition.onresult = event => {
     const results = event.results
     const text = results[results.length - 1][0].transcript
     applyLocalText(text)
@@ -73,7 +71,7 @@ const startRecognition = () => {
     console.log("recognition", "speech end")
   }
 
-  recognition.onerror = (event) => {
+  recognition.onerror = event => {
     if(event.error == "no-speech") {
       console.log("recognition", "no-speech")
       return;
@@ -100,6 +98,12 @@ const applyRemoteText = text => {
 }
 
 const send = text => room.send(text)
+
+const getRoomName = () => {
+  const search = location.search
+  const roomName = search.slice(1).replaceAll("/", "-")
+  return btoa(roomName)
+}
 
 const main = async () => {
   startRecognition()
